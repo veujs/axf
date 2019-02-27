@@ -1,0 +1,94 @@
+{% extends 'axf/base.html' %}
+
+{% load static from staticfiles %}
+{% block linkscript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'order/css/order.css' %}"/>
+    <script type="text/javascript" src="{% static 'order/js/order.js' %}"></script>
+{% endblock linkscript %}
+
+{% block base %}
+
+<div id="orderinfo">
+
+    <h3>订单列表</h3>
+
+{#    <ul>#}
+{#        显示全部的订单信息#}
+{#        {% for ordergood in orders.order_d_goods_set.all %}#}
+        {% for order in orders %}
+            <ul>
+
+
+                <section class="delivery">
+                    <span>订单编号：{{ order.id }}</span>
+
+                    <span class="confirm_order">
+                        {% if flag == "0" %}
+                        <span class="is_select" order_id="{{ order.id }}">
+                            <span id="{{ order.id }}select">
+                               {% ifequal True order.is_select %}
+                                √
+                                {% endifequal %}
+                            </span>
+
+                        </span>
+                        {% else %}
+                                <p>
+                                    查看物流
+                                </p>
+                        {% endif %}
+                    </span>
+
+
+                </section>
+{#                <span>订单编号：{{ order.id }}</span>#}
+
+{#                <div class="confirm">#}
+{#                    <span class="is_select" orderid="{{ order.id }}">#}
+{#                        <span id="{{ order.id }}select">#}
+{#                            {% ifequal True order.is_select %}#}
+{#                            √#}
+{#                            {% endifequal %}#}
+{#                        </span>#}
+{#                    </span>#}
+{#                </div>#}
+                {% for order_d_good in order.order_d_goods_set.all %}
+                <li id="{{ order_d_good.goods.productid }}li" class="menuList">
+                     <a href="#详情页">
+                        <img src="{{ order_d_good.goods.productimg }}"/>
+                        <p>商品名称：{{ order_d_good.goods.productlongname }}</p>
+                        <p>商品数量：{{ order_d_good.g_num }}</p>
+                        <p>商品单价：{{ order_d_good.goods.price }}</p>
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+        {% endfor %}
+
+
+
+
+
+
+
+    {#    订单id展示#}
+        <!--订单id展示-->
+    {% if flag == "0" %}
+            <p>共计：</p>
+        <a href="#">
+            <button id="alipay" class="btn btn-success btn-block">支付</button>
+        </a>
+    {% else %}
+        {% if flag == "1" %}
+            <a href="#"><span>查看物流情况</span></a>
+        {% endif %}
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}
+
+

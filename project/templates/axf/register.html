@@ -1,0 +1,85 @@
+{% extends 'axf/base.html' %}
+
+{% load static from staticfiles %}
+{% block linkscript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mine/css/register.css' %}"/>
+    <script type="text/javascript" src="{% static 'mine/js/register.js' %}"></script>
+{% endblock linkscript %}
+
+
+{% block base %}
+
+<div id="register">
+    <h1>{{ title }}</h1>
+    <a href="/mine/">返回</a>
+
+    <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="input-group">
+                <span class="input-group-addon">账号</span>
+                <input id="account" type="text" name="userAccount" class="form-control" placeholder="账号长度为6~12字符"
+                aria-describedby="basic-addon1">
+                <span id="username_info"></span>
+            </div>
+            <span id="accounterr" class="error"> 账号格式输入错误</span>
+            <span id="checkerr" class="error"> 账号已被占用，请重新输入</span>
+            <br/>
+
+           <div class="input-group">
+                <span class="input-group-addon">密码</span>
+                <input id="passwd" type="password" name="userPasswd" class="form-control"
+                       placeholder="密码长度为6~12字符" aria-describedby="basic-addon1">
+            </div>
+            <span id="passwderr" class="error"> 密码格式输入错误</span>
+            <br/>
+
+
+           <div class="input-group">
+                <span class="input-group-addon">验证</span>
+                <input id="passwd2" type="password" name="userpasswd2" class="form-control"
+                       placeholder="账号长度为6~12字符" aria-describedby="basic-addon1">
+            </div>
+            <span id="passwd2err" class="error"> 两次密码输入不同</span>
+            <br/>
+
+            <div class="input-group">
+                <span class="input-group-addon">昵称</span>
+                <input required="required" type="text" name="userName" class="form-control"
+                       placeholder="名称" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+
+            <div class="input-group">
+                <span class="input-group-addon">电话</span>
+                <input required="required" type="text" name="userPhone" class="form-control"
+                       placeholder="手机号码" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">地址</span>
+                <input required="required" type="text" name="userAddress" class="form-control"
+                       placeholder="请填写常用地址" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+
+            <div class="input-group">
+                <label class="input-group-addon">头像</label>
+                <input required="required" type="file" name="userImg"
+                       placeholder="头像" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+            <div class="input-group">
+                <label class="input-group-addon">注册</label>
+                <input type="submit" class="form-control"
+                       value="注册" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+    </form>
+</div>
+
+
+
+{% endblock base %}
+
+
+

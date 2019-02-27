@@ -1,0 +1,51 @@
+{% extends 'axf/base.html' %}
+
+
+{% load static from staticfiles %}
+{% block linkscript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mine/css/login.css' %}"/>
+    <script type="text/javascript" src="{% static 'mine/js/login.js' %}"></script>
+{% endblock linkscript %}
+
+
+{% block base %}
+
+<div id="login">
+
+
+    <h1 class="text-center">登录界面</h1>
+    <a href="/mine/" style="display: inline;alignment:right">返回</a>
+
+
+    <div id="box">
+        <form action="/login/" method="post" >
+            <div class="input-group">
+                <label for="">账号：</label>
+                {{ form.username }}
+                <br>
+                <br>
+                {% if error.username.0 %}
+                <span>{{ error.username.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="input-group">
+                <label for="">密码：</label>
+                {{ form.passwd }}
+                <br>
+                {% if error.passwd.0 %}
+                <span>{{ error.passwd.0 }}</span>
+                {% endif %}
+            </div>
+
+            <input type="submit" value="登录" class="text-center">
+
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock base %}
+
+
+

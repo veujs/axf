@@ -1,0 +1,108 @@
+{% extends 'axf/base.html' %}
+
+{% load static from staticfiles %}
+{% block linkscript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cart/css/cart.css' %}"/>
+    <script type="text/javascript" src="{% static 'cart/js/cart.js' %}"></script>
+{% endblock linkscript %}
+
+
+
+{% block base %}
+<div id="cart">
+
+    <h3><b>购物车</b></h3>
+    <section class="full">
+        <section>
+
+            <ul>
+                <li>
+                    <div class="clear">
+{#                       <p style="display: inline-block"><b style="display: inline-block">sdsdfs</b></p>#}
+{#                        <p>gt</p>#}
+                        <p class="infoJustify"><b>收货人:</b></p>
+                        <p><span>wzp</span></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="clear">
+                        <p class="infoJustify"><b>电话:</b></p><p><span>18710834869</span>
+                            <a class="change">修改</a>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="clear">
+                        <p class="infoJustify"><b>收货地址:</b></p><p><span>西安市省图书馆</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <section class="bill">
+                <p><span>闪送超时</span></p>
+                <p>0起送，22:00前满30免运费你</p>
+                <a>凑单专区</a>
+            </section>
+            <section class="delivery">
+                <span>收货时间:</span>
+                <span>一小时送达</span>
+                <a href="#">可送达&gt;</a>
+            </section>
+            <section class="delivery">
+                <span>留言:</span>
+                <input type="text" placeholder="有什么特殊需求">
+            </section>
+
+            <menu>
+                <ul>
+                    {% for item in cartsList %}
+                     <li id="{{ item.productid }}li" class="menuList">
+                        <div class="confirm">
+                            <span class="ischose" goodsid="{{ item.productid }}">
+                                <span id="{{ item.productid }}select">
+                                    {% ifequal True item.ischose %}
+                                    √
+                                    {% endifequal %}
+                                </span>
+                            </span>
+                        </div>
+                        <a href="#详情页">
+                            <img src="{{ item.productimg }}"/>
+                            <p>{{ item.productlongname }}</p>
+                            <span id="{{ item.productid }}price" class="{{ productprice }}">{{ item.totalprice }}</span>
+                        </a>
+                        <section>
+                            <button class="subShopping" ga="{{ item.productid }}">-</button>
+                            <span id="{{ item.productid }}num">{{ item.productnum }}</span>
+                            <button class="addShopping" ga="{{ item.productid }}">+</button>
+                        </section>
+                     </li>
+                    {% endfor %}
+
+
+                    <li class="payTheBill">
+                        <div class="confirm">
+                            <span>
+                                <span>
+                                    {% if trueFlag %}
+                                    √
+                                    {% endif %}
+                                </span>
+                            </span>
+                        </div>
+                        <p>
+                            <span>全选</span>
+                            <span>共计：</span>
+                            <span>总价</span>
+                        </p>
+                        <span id="ok">选好了</span>
+                    </li>
+                </ul>
+            </menu>
+        </section>
+    </section>
+</div>
+{% endblock base %}
+
+
+
